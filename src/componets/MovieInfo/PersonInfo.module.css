@@ -1,0 +1,7 @@
+.divka{
+    color: blue;
+}
+.divka:hover{
+    cursor: pointer;
+    background: silver;
+}

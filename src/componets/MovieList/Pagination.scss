@@ -1,0 +1,32 @@
+.Pagination {
+  $this: &;
+  display: flex;
+  align-items: center;
+  list-style: none;
+  outline: transparent;
+  justify-content: space-evenly;
+  & > li {
+    margin: 2px;
+    width: 50px;
+    height: 30px;
+  }
+
+  & > li > a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    background-color: transparent;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    outline: transparent;
+    cursor: pointer;
+    
+  }
+
+  &:hover {
+    background-color: silver;
+
+  }
+}

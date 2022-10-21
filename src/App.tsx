@@ -1,26 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {FC} from 'react';
 import './App.css';
+import {MovieInfo, MovieList, PersonInfo, PersonPage, SearchPage, YearPage} from "./componets";
+import {Navigate, Route, Routes} from 'react-router-dom'
+import {MainLayout} from "./layout/MainLayout/MainLayout";
+import {FilterMovie} from "./pages";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const App: FC = () => {
+    return (
+        <Routes >
+            <Route path={'/'} element={<MainLayout/>}>
+                <Route index element={<Navigate to={'movies'} />}/>
+                <Route path={'movies'} element={<MovieList />}/>
+                    <Route path={'movies/:id'} element={<MovieInfo />}/>
+                <Route path={'filter'} element={<FilterMovie />}/>
+                    <Route path={'filter/:id'} element={<MovieInfo />}/>
+                <Route path={'search'} element={<SearchPage/>}></Route>
+                    <Route path={'search/:id'} element={<MovieInfo />}/>
+                <Route path={'year'} element={<YearPage/>}></Route>
+                        <Route path={'year/:id'} element={<MovieInfo />}/>
+                <Route path={'person'} element={<PersonPage />}/>
+                <Route path={'person/:id_person'} element={<PersonInfo />}/>
+            </Route>
+        </Routes>
+    );
 }
 
-export default App;
+export {App};
