@@ -16,12 +16,9 @@ const Header: FC = () => {
                 <h1 style={{paddingLeft:'50px'}}>
                     The Movie  <Badge bg="secondary">Database</Badge>
                 </h1>
-                <div style={{display:'flex',justifyContent:'space-around'}}>
-                    <Link to={'tv'}>TV</Link>
-                    <Link to={'/'} >Movies</Link>
-                </div>
-                <div style={{justifyContent:'center', alignItems:"center",}}>
-                    <p style={{margin: "10px"}}>login:M@xXx</p>
+                <div style={{display:'flex',justifyContent:'space-around',marginBottom:'30px'}}>
+                    <Link to={'tv'}><strong>ТВ Передачі</strong></Link>
+                    <Link to={'/'} ><strong>Фільми</strong></Link>
                 </div>
             <FilterMovie/>
             </div>

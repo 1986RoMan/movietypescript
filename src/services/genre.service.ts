@@ -9,7 +9,7 @@ type Res<T>=Promise<AxiosResponse<T>>
 
 
 const genreService={
-    getAll:():Res<IServerResponseGenre < IGenre[]>> => axiosInstance.get(`${urls.genre}?api_key=${api_key}`)
+    getAll:():Res<IServerResponseGenre < IGenre[]>> => axiosInstance.get(`${urls.genre}?api_key=${api_key}&language=ru`)
 }
 
 export {genreService}

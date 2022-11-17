@@ -6,10 +6,10 @@ import {AxiosResponse} from "axios";
 
 type Res<T>=Promise<AxiosResponse<T>>
 const tvService= {
-    getAllTv: (page: number): Res<IServerResponseTv<ITv[]>> => axiosInstance.get(`${urls.tv}?api_key=${api_key}`, {params: {page}}),
-    getProgramById: (id: string) => axiosInstance.get(`${urls.tvProgram}/${id}?api_key=${api_key}`),
-    allTvGenre: () : Res<IServerResponseGenre<IGenre[]>> => axiosInstance.get(`${urls.genderTv}?api_key=${api_key}`),
-    tvTop: (): Res<IServerResponseTv<ITv[]>> => axiosInstance.get(`${urls.tvTop}?api_key=${api_key}`)
+    getAllTv: (page: number): Res<IServerResponseTv<ITv[]>> => axiosInstance.get(`${urls.tv}?api_key=${api_key}&language=ru`, {params: {page}}),
+    getProgramById: (id: string) => axiosInstance.get(`${urls.tvProgram}/${id}?api_key=${api_key}&language=ru`),
+    allTvGenre: () : Res<IServerResponseGenre<IGenre[]>> => axiosInstance.get(`${urls.genderTv}?api_key=${api_key}&language=ru`),
+    tvTop: (): Res<IServerResponseTv<ITv[]>> => axiosInstance.get(`${urls.tvTop}?api_key=${api_key}&language=ru`)
 }
 
 export {tvService}

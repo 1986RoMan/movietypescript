@@ -85,9 +85,9 @@ const PersonInfo: FC = () => {
         }
     }
     // let corect=movieArray.join(',')
-
+    console.log(state.known_for)
     return (
-        <div style={{display: 'flex',flexWrap:'wrap',marginTop:"15px",marginLeft:'280px'}}>
+        <div style={{display: 'flex',flexWrap:'wrap',marginTop:"15px",marginLeft:'280px',color:'white'}}>
             {
                 person
                 &&
@@ -104,13 +104,16 @@ const PersonInfo: FC = () => {
                     </div>
                     <div>{person.place_of_birth}</div>
                     <div>{person.popularity}</div>
-                    { state.known_for ?
+                    { state.known_for.length===0 ?
+                        <div></div>
+                        :
                         <div>Найпопулярніші фільми за участю актора:
-                            <div>{movieArray.map((value, index) =>
+                            {movieArray.map((value, index) =>
                                 <div key={value.id} className={css.divka}
-                                     onClick={() => navigate(`/movies/${value.id}`, {state: value})}>{value.title}</div>)}
-                            </div>
-                        </div>: <div></div>
+                                     onClick={() => navigate(`/movies/${value.id}`, {state: value})}>
+                                    {value.title}
+                                </div>)}
+                        </div>
                     }
 
                 </div>

@@ -41,7 +41,7 @@ movieService.videoMovie(state.id).then(({data}) => {
     },[])
 
     return (
-        <div style={{display: 'flex',flexWrap:'wrap',marginLeft:'280px'}}>
+        <div style={{display: 'flex',flexWrap:'wrap',marginLeft:'280px',color:'white'}}>
 
             <h1>
                 Інформація про фільм"
@@ -52,11 +52,11 @@ movieService.videoMovie(state.id).then(({data}) => {
                     <div>
                         <b>Назва:</b> {state.title}
                     </div>
-                    <div>
-                        <b>Жанри:</b> {genres.map(value =>
-                        <div key={value.id}> {state.genre_ids.includes(value.id)
+                    <div style={{display:'flex'}}>
+                        <b >Жанри:</b> {genres.map(value =>
+                        <div style={{marginLeft:'2px'}}  key={value.id}> {state.genre_ids.includes(value.id)
                             ?
-                            <div>
+                            <div >
                                 {(value.name + ", ")}
                             </div> : ''}
                         </div>)}

@@ -26,7 +26,7 @@ const MovieCard:FC<Iprops> = ({movie}) => {
                 {!info ? <div className={css.card} onClick={()=>{setInfo(prevState => !prevState)}}></div>
                     :
                     <div onClick={()=>{setInfo(prevState => !prevState)}} className={css.blok1}>
-                        <div>{movie.title}</div>
+                        <div><b>{movie.title}</b></div>
                         Peйтинг:<div>{movie.vote_average}</div>
                         Дата релізу:<div>{movie.release_date}</div>
                         <div>

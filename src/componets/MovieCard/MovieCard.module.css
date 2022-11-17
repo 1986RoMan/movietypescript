@@ -17,9 +17,9 @@
 }
 .blok1{
     width: 200px;
-    height: 200px;
-    background: snow;
-    opacity: .5;
+    height: 250px;
+    background: fuchsia;
+    opacity: .6;
     transition: all 0.5s;
     position: absolute;
      top: 0;
