@@ -10,4 +10,9 @@ export * from './Person/Person';
 export * from './PersonInfo/PersonInfo';
 export  * from './SearchPage/SearchPage';
 export  * from './YearPage/YearPage';
-export * from './Menu/Menu'
+export * from './Menu/Menu';
+export * from './Tvs/Tvs';
+export * from './TvsTop/TvsTop';
+export * from './TvsTop/TvTop';
+export * from './NowPlaying/NowPlaying';
+export * from './NowPlayingCard/NowPlayingCard'

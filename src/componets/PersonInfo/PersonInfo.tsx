@@ -1,7 +1,12 @@
 import React, {FC, useEffect, useState} from 'react';
 import {useLocation, useParams, Link, useNavigate} from "react-router-dom";
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+
+
 import {movieService} from "../../services";
 import css from './PersonInfo.module.css'
+import {useAppLocation} from "../../hooks/router.hook";
+import {faSquareXmark} from "@fortawesome/free-solid-svg-icons";
 
 export interface IPerson {
     biography: string,
@@ -52,62 +57,62 @@ export interface IMoviePerson{
 
 const PersonInfo: FC = () => {
     const navigate = useNavigate();
-    const [movie,setMovie] = useState<IMoviePerson>();
-    const [person, setPerson] = useState<IPerson>();
-    const {state} = useLocation();
-    const params = useParams();
-    console.log(state)
+    const {state} = useAppLocation<IPerson>();
+    const [movie,setMovie] = useState<IMoviePerson |null>(null);
+    const [person, setPerson] = useState<IPerson|null>(null);
+    const {id_person} = useParams<{id_person:string}>();
+
     useEffect(()=>{
         movieService.movieCredits(state.id).then(({data})=>{
-             setMovie(data)
-            console.log(data)})
+             setMovie(data)})
     },[])
 
     useEffect(() => {
         if(state){
-        movieService.personInfo(state.id).then(({data}) => {
+            movieService.personInfo(id_person).then(({data}) => {
             setPerson(data)
-            console.log(data)
         })}
-       else  if(params){
-            movieService.personInfo(params.id_person).then(({data}) => {
+       else  if(id_person){
+            movieService.personInfo(id_person).then(({data}) => {
                 setPerson(data)
-                console.log(data)
             })}
-    }, [state,params])
+    }, [state,id_person])
     const ternarka = person?.also_known_as.find(value1 => value1.replace(/[^а-я]/g, ""))
-    console.log(ternarka)
-
-    console.log(state)
-    console.log(params)
-    // const movieArray=[]
-    // for (const valueElement of state.known_for) {
-    //     console.log(valueElement.original_title)
-    //       movieArray.push(valueElement)
-    // }
+    const movieArray=[]
+    if( state.known_for){
+     for ( let valueElement of state.known_for) {
+            movieArray.push(valueElement)
+        }
+    }
     // let corect=movieArray.join(',')
-    // console.log(movieArray)
+
     return (
-        <div style={{display: 'flex',flexWrap:'wrap',marginTop:"15px",marginLeft:'270px'}}>
+        <div style={{display: 'flex',flexWrap:'wrap',marginTop:"15px",marginLeft:'280px'}}>
             {
                 person
                 &&
                 <div>
+                    {/*<FontAwesomeIcon icon={faSquareXmark} />*/}
                     <img src={`https://image.tmdb.org/t/p/w500/${person.profile_path}`} alt="person"/>
                     <div>{ternarka ? ternarka : person.name } </div>
                     <div>{person.biography}</div>
                     <div>{person.birthday}</div>
                     <div style={{display:'flex',flexWrap:'wrap'}}><strong>Знімався в фільмах:</strong>
                         {
-                      movie && movie.cast.map(value => <span  className={css.divka} onClick={()=>navigate(`/movies/${value.id}`,{state:value})}>{value.title + " ,"}</span>)
+                      movie && movie.cast.map(value => <span key={value.id} className={css.divka} onClick={()=>navigate(`/movies/${value.id}`,{state:value})}>{value.title + " ,"}</span>)
                         }
                     </div>
                     <div>{person.place_of_birth}</div>
                     <div>{person.popularity}</div>
-                    {/* <div >Найпопулярніші фільми за участю актора:<div>{movieArray.map((value, index)=>*/}
-                    {/*    <div key={index} className={css.divka} onClick={()=>navigate(`/movies/${value.id}`,{state:value}) }>{value.title}</div>)}*/}
-                    {/*</div>*/}
-                    {/*</div>*/}
+                    { state.known_for ?
+                        <div>Найпопулярніші фільми за участю актора:
+                            <div>{movieArray.map((value, index) =>
+                                <div key={value.id} className={css.divka}
+                                     onClick={() => navigate(`/movies/${value.id}`, {state: value})}>{value.title}</div>)}
+                            </div>
+                        </div>: <div></div>
+                    }
+
                 </div>
             }
         </div>

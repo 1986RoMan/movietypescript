@@ -3,7 +3,7 @@ import {urls} from "../constans";
 import {IMovie, IPerson, IPersonServerResponse, IServerResponse} from "../interfaces/interfaces";
 import {AxiosResponse} from "axios";
 
- const api_key='d5e768d1beb0e7057f807f2f56ffd621'
+ export const api_key='d5e768d1beb0e7057f807f2f56ffd621'
 
 type Res<T>=Promise<AxiosResponse<T>>
 const movieService ={
@@ -17,7 +17,8 @@ const movieService ={
      {params:{page}}),
  personInfo:(id:any)=> axiosInstance.get(`${urls.personInf}/${id}?api_key=${api_key}`),
  movieCredits:(person_id:number)=>axiosInstance.get(`${urls.personInf}/${person_id}/movie_credits?api_key=${api_key}`),
- credits:(id:number)=> axiosInstance.get(`${urls.movieVideo}/${id}/credits?api_key=${api_key}`)
+ credits:(id:number)=> axiosInstance.get(`${urls.movieVideo}/${id}/credits?api_key=${api_key}`),
+ allNowPlaying:() => axiosInstance.get(`${urls.nowPlaying}?api_key=${api_key}`)
 }
 
 export {movieService}

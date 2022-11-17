@@ -6,7 +6,12 @@ const urls={
     search:'search/movie',
     movieVideo:'movie',
     person:'person/popular',
-    personInf:'person'
+    personInf:'person',
+    tv:'/discover/tv',
+    tvProgram:'tv',
+    genderTv:'/genre/tv/list',
+    tvTop:'/tv/top_rated',
+    nowPlaying :'/movie/now_playing'
 }
 
 export {baseURL,urls}

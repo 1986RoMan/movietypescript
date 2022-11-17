@@ -1,4 +1,5 @@
 import React, {FC, ReactNode} from 'react';
+
 import {IMovie, IPerson} from "../../interfaces/interfaces";
 import {Link} from "react-router-dom";
 
@@ -8,7 +9,6 @@ export  interface IpropsPerson {
 }
 const Person:FC<IpropsPerson> = ({person}) => {
     // for (const person1 of person.known_for) {
-    //     console.log(person1)
     // }
     return (
         <div style={{

@@ -10,7 +10,7 @@ const initialState:IState={
 }
 
 const genreAll = createAsyncThunk<IServerResponseGenre<IGenre[]>>(
-    'genreSlice/genreSlice',
+    'genreSlice/genreAll',
     async ()=>{
         const {data}=await genreService.getAll();
         return data

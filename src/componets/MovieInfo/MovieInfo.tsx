@@ -19,16 +19,14 @@ const MovieInfo:FC = () => {
     const [credits,setCredits] = useState<IMoviePerson>();
     const {genres} = useAppSelector(state =>state.genreReducer );
     const params = useParams();
-    const [movie,setMovie] = useState<IMoviePerson>();
     const {state} = useLocation();
+    const [movie,setMovie] = useState<IMoviePerson>(state);
 
     useEffect(()=>{
        movieService.credits(state.id).then(({data})=>{
-            setCredits(data)
-           console.log(data)})
+            setCredits(data)})
     },[])
-    console.log(params)
-    console.log(state.id)
+
     useEffect(()=>{
         if(state){
 movieService.videoMovie(state.id).then(({data}) => {
@@ -43,13 +41,13 @@ movieService.videoMovie(state.id).then(({data}) => {
     },[])
 
     return (
-        <div style={{display: 'flex',flexWrap:'wrap',marginLeft:'270px'}}>
+        <div style={{display: 'flex',flexWrap:'wrap',marginLeft:'280px'}}>
 
             <h1>
                 Інформація про фільм"
             </h1>
             <div>
-                <img style={{width:'900px',height:'600px'}} src={`https://image.tmdb.org/t/p/w500/${state.backdrop_path}`} alt={state.original_title}/>
+                <img style={{width:'800px',height:'600px',borderRadius:'10%'}} src={`https://image.tmdb.org/t/p/w500/${state.backdrop_path}`} alt={state.original_title}/>
                 <div>
                     <div>
                         <b>Назва:</b> {state.title}
@@ -68,7 +66,7 @@ movieService.videoMovie(state.id).then(({data}) => {
                     <div style={{display:'flex',flexWrap:'wrap'}}><b >Акторський склад:</b>
                         {
                             credits?.cast.map(actor=>
-                                <div className={css.divka} onClick={()=>navigate(`/person/${actor.id}`,{state:actor})} style={{marginLeft:'5px'}}> {actor.name+' ,'}
+                                <div key={actor.id} className={css.divka} onClick={()=>navigate(`/person/${actor.id}`,{state:actor})} style={{marginLeft:'5px'}}> {actor.name+' ,'}
                                 </div>)
                         }
                     </div>

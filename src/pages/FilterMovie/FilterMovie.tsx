@@ -11,20 +11,19 @@ const FilterMovie:FC = () => {
     const {filterMovie,pageCount,filterGenre} = useAppSelector(state => state.movieReducer);
 
     const handlePageClick = ({selected}: { selected: number }) => {
-        console.log(selected)
         setPage(selected + 1)
     };
     useEffect(()=>{
         dispatch(movieAction.filterMovie({genre:filterGenre, page}))
     },[page,filterGenre])
-    console.log(filterMovie)
+
     return (
         <div >
 
             <div style={{display: 'flex',flexWrap:'wrap',paddingLeft:'250px'}}>{
                 filterMovie.map(movie => <MovieCard key={movie.id} movie={movie}/>)
             }</div>
-            <div>
+            <div style={{position:'sticky',bottom:0}}>
                 {pageCount && <ReactPaginate
                     breakLabel="..."
                     nextLabel="next >"

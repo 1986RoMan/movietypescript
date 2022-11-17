@@ -1,6 +1,8 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {movieService} from "../../services";
 import {IMovie, IServerResponse} from "../../interfaces/interfaces";
+import {AxiosError} from "axios";
+import {IError} from "./tv.slice";
 
 
 interface IState {
@@ -10,7 +12,9 @@ interface IState {
     filterMovie:IMovie[],
     filterGenre:number|null,
     filterYearValue:string,
-    setSearchValue:string
+    setSearchValue:string,
+    errors:IError|any,
+    nowPlayingNow:IMovie[]
 }
 const initialState:IState={
     movies:[],
@@ -19,7 +23,9 @@ const initialState:IState={
     filterMovie:[],
     filterGenre:null,
     filterYearValue:'',
-    setSearchValue:''
+    setSearchValue:'',
+    errors:null,
+    nowPlayingNow : []
 }
 const movieSearch = createAsyncThunk<IServerResponse<IMovie[]>, {search:any,page:number}>(
   'allMovie/movieSearch',
@@ -30,15 +36,21 @@ const movieSearch = createAsyncThunk<IServerResponse<IMovie[]>, {search:any,page
 );
 const allMovie = createAsyncThunk<IServerResponse<IMovie[]>,{page:number}>(
     "movieSlice/allMovie",
-    async ({page})=>{
+    async ({page},{rejectWithValue})=>{
+        try {
         const {data} = await movieService.getAll(page);
         return data;
+        }
+        catch (e) {
+            const errror= e as AxiosError
+            return rejectWithValue(errror.message)
+        }
     }
 );
 const filterMovie = createAsyncThunk<IServerResponse<IMovie[]>,{genre:any,page:number}>(
     "movieSlice/filterMovie",
     async ({genre,page})=>{
-        const {data} = await movieService.filterMovie(genre.genre,page);
+        const {data} = await movieService.filterMovie(genre,page);
         return data;
     }
 );
@@ -49,30 +61,36 @@ const filterMovie = createAsyncThunk<IServerResponse<IMovie[]>,{genre:any,page:n
          return data
     }
  )
+const nowPlying= createAsyncThunk<IServerResponse<IMovie[]>>(
+    'nowPlying',
+    async () => {
+        const {data} = await movieService.allNowPlaying();
+        return data
+    }
+)
 const movieSlice = createSlice({
     name:'movieSlice',
     initialState,
     reducers:{
         setSearchValue:(state,action)=>{
             state.searchM=action.payload
-            console.log(JSON.stringify(state.searchM))
+
         },
         setFilterValue:((state, action) => {
             state.filterGenre=action.payload
-            console.log(state.filterGenre)
+
         }),
         setYearValue:((state, action) => {
             state.filterYearValue=action.payload
-            console.log(state.filterYearValue)
+
         })
     },
     extraReducers:builder => {
         builder
-            .addCase(allMovie.fulfilled,((state, action)=>{
-                state.movies=action.payload.results
-                console.log(JSON.stringify(state.movies))
-                state.pageCount=action.payload.total_pages
-
+            .addCase(allMovie.fulfilled, ((state, action) => {
+                state.movies = action.payload.results
+                state.pageCount = action.payload.total_pages
+                state.errors= ''
             }))
             .addCase(movieSearch.fulfilled,(state, action)=>{
                 state.movies=action.payload.results
@@ -85,8 +103,16 @@ const movieSlice = createSlice({
             .addCase(filterYear.fulfilled,(state, action)=>{
                 state.movies=action.payload.results
                 state.pageCount=action.payload.total_pages
-                console.log(JSON.stringify(state.movies))
-
+            })
+            .addCase(nowPlying.fulfilled,((state, action) => {
+                     state.nowPlayingNow =action.payload.results
+            }))
+            .addDefaultCase((state, action) => {
+                const [type] = action.type.split('/').splice(-1);
+                if (type === 'rejected') {
+                    state.errors = action.payload
+                    console.log(state.errors)
+                }
             })
     }
 })
@@ -99,7 +125,8 @@ const movieAction={
     filterMovie,
     setFilterValue,
     filterYear,
-    setYearValue
+    setYearValue,
+    nowPlying
 }
 
 export {

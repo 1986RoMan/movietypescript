@@ -4,32 +4,33 @@ import {useAppDispatch, useAppSelector} from "../../hooks/hook";
 import {MovieCard} from "../MovieCard/MovieCard";
 import ReactPaginate from "react-paginate";
 import './Pagination.scss';
+import css from './MovieList.module.css'
+import {NowPlaying} from "../NowPlaying/NowPlaying";
 
 const MovieList: FC = () => {
     const [page, setPage] = useState(1);
     const dispatch = useAppDispatch();
-    const {movies, pageCount,searchM,filterYearValue} = useAppSelector(state => state.movieReducer);
+    const {movies, pageCount,searchM,filterYearValue,errors} = useAppSelector(state => state.movieReducer);
 
-
+    console.log(errors)
     useEffect(() => {
         dispatch(movieAction.allMovie({page}))
     }, [page])
-    console.log(movies)
-    console.log(filterYearValue)
-    console.log(pageCount)
+
     const handlePageClick = ({selected}: { selected: number }) => {
-        console.log(selected)
+
         setPage(selected + 1)
     };
     return (
         <div >
-
-            <div style={{display: 'flex',flexWrap:'wrap',paddingLeft:'250px'}}>
+            <NowPlaying/>
+            <div  className={css.divi}>
                 {
-                    movies.map(movie => <MovieCard key={movie.id} movie={movie}/>)
+                  !errors ? movies.map(movie => <MovieCard key={movie.id} movie={movie}/>)
+                 : <h1>{errors}</h1>
                 }
             </div>
-            <div>
+            <div style={{position:'sticky',bottom:0}}>
                 {pageCount && <ReactPaginate
                     breakLabel="..."
                     nextLabel="next >"

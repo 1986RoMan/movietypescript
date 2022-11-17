@@ -1,0 +1,26 @@
+.directDivRelativ{
+  display: none;
+  width: 400px;
+  height: 400px;
+}
+.directDivAbsolute{
+  position: absolute;
+  width: auto;
+  height: auto;
+  background: snow;
+  display: flex;
+  flex-wrap: wrap;
+  bottom: 300px;
+}
+.directDiv:hover{
+  cursor: pointer;
+  background: silver;
+}
+
+.exit{
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  right: 0px;
+  color: red;
+}

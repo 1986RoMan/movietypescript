@@ -6,14 +6,13 @@ import {Link} from "react-router-dom";
 
 const Menu:FC = () => {
         return (
-            <div style={{}}>
-                <div style={{ height: '500px',width:'250px', background: 'silver', position: 'fixed', margin: '0',borderRadius:'5%'}}>
+            <div style={{top:'100px'}}>
+                <div style={{ height: '500px',width:'250px', background: 'rgba(129,45,211,0.3)',marginTop:'-200px',position: 'fixed',borderRadius:'5%'}}>
 
-                    <div>
+                    <div className='mb-0.5'>
                         <Link to={'/'} >На головну сторінку</Link>
                     </div>
                     <SearchForm/>
-                    <FilterMovie/>
                     <FormYear/>
                     <Link to={'person'}>Популярні актори</Link>
                 </div>

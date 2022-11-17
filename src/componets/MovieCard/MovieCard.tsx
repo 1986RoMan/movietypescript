@@ -1,38 +1,48 @@
-import React, {FC, ReactNode, useEffect, useState} from 'react';
-import {IMovie} from "../../interfaces/interfaces";
+import React, {FC, ReactNode, useState} from 'react';
 import {Link} from "react-router-dom";
+import {IoIosInformationCircleOutline} from 'react-icons/io'
+import {IGenre, IMovie} from "../../interfaces/interfaces";
+import css from './MovieCard.module.css'
 import {useAppSelector} from "../../hooks/hook";
-import {movieService} from "../../services";
-import {movieAction, personAction} from "../../redax";
-
-  export  interface Iprops {
+export  interface Iprops {
         movie:IMovie,
         children?:ReactNode
     }
 const MovieCard:FC<Iprops> = ({movie}) => {
-
+    const {genres} = useAppSelector(state => state.genreReducer);
+      const [info,setInfo] = useState(false);
     return (
-        <div style={{
-        display: 'flex',
-            flexWrap:'wrap',
-            // height:'250 px',
-            border:'solid 2px black',
-            //justifyContent: 'center',
-            //alignItems: 'center',
-            flexDirection:'column',
-            width: '180px',
-                 margin:'20px',
-            borderRadius:'5%'
-    }}>
-            <Link to={`${movie.id}`} state={movie}>
-            <div><img style={{width:'180px',height:'150px'}} src={`https://image.tmdb.org/t/p/w300/${movie.backdrop_path}`} alt=""/></div>
-            <div>{movie.id}</div>
+        <div>
+                <IoIosInformationCircleOutline style={{color:'white',fontSize:'30px',marginBottom:'-30px'}}
+                                               onMouseOver={()=>{setInfo(prevState => !prevState)}}
+                                               onMouseOut={()=>{setInfo(prevState => !prevState)}}
+                />
+        <div className={css.card}>
+            <Link style={{color:'white',fontSize:'20px'}} to={`${movie.id}`} state={movie}>
+            <div><img style={{width:'180px',height:'180px',borderRadius:'5px'}} src={`https://image.tmdb.org/t/p/w300/${movie.backdrop_path}`} alt={movie.title}/></div>
             <div>{movie.adult}</div>
             <div>{movie.title}</div>
-            <div>{movie.release_date}</div>
         </Link>
+                {!info ? <div className={css.card} onClick={()=>{setInfo(prevState => !prevState)}}></div>
+                    :
+                    <div onClick={()=>{setInfo(prevState => !prevState)}} className={css.blok1}>
+                        <div>{movie.title}</div>
+                        Peйтинг:<div>{movie.vote_average}</div>
+                        Дата релізу:<div>{movie.release_date}</div>
+                        <div>
+                            <b>Жанри:</b> {genres.map(value =>
+                            <div key={value.id}> {movie.genre_ids.includes(value.id)
+                                ?
+                                <div>
+                                    {(value.name + ", ")}
+                                </div> : ''}
+                                <div/>
+                            </div>)}
+                        </div>
+                    </div>}
         </div>
-    );
+        </div>
+            );
 };
 
 export {MovieCard};

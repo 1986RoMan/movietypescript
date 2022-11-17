@@ -11,16 +11,15 @@ const SearchForm:FC = () => {
 const dispatch = useAppDispatch();
     const mySubmit = (search:any) => {
         dispatch(movieAction.setSearchValue({search:search.search}))
-        console.log(search)
         reset()
     };
      const serchValue=getValues()
 
     return (
-        <div>
+        <div className='mb-0.5 mt-0'>
             <form onSubmit={handleSubmit(mySubmit)}>
-                <input placeholder={'Пошук'} {...register('search')}></input>
-                <button onClick={()=>navigate('/search')}>Пошук</button>
+                <input className='bg-amber-800' placeholder={'Пошук'} {...register('search')}></input>
+                <button className='border-2 m-lg-1 w-22 h-8  text-red-50 bg-blue-200 rounded-full' onClick={()=>navigate('/search')}>Пошук</button>
             </form>
         </div>
     );

@@ -1,0 +1,26 @@
+.card {
+    box-sizing: border-box;
+    top:20px;
+    flexDirection:column;
+    width: 180px;
+    margin:20px;
+    borderRadius:5%;
+  position: relative;
+}
+.card:hover {
+    -webkit-transform: scale(1.2);
+    -ms-transform: scale(1.2);
+    transform: scale(1.2);
+}
+.blok{
+    display: none;
+}
+.blok1{
+    width: 200px;
+    height: 200px;
+    background: snow;
+    opacity: .5;
+    transition: all 0.5s;
+    position: absolute;
+     top: 0;
+}

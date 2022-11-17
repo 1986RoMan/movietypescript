@@ -36,8 +36,7 @@ const personSlice =createSlice({
             .addCase(personPopular.fulfilled,((state, action) => {
                 state.moviesPerson= action.payload.results
                 state.pageCount=action.payload.total_pages
-                //state.page=action.payload.page
-               console.log(JSON.stringify(state.moviesPerson))
+
             }))
     }
 })

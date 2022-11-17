@@ -3,14 +3,18 @@ import './App.css';
 import {MovieInfo, MovieList, PersonInfo, PersonPage, SearchPage, YearPage} from "./componets";
 import {Navigate, Route, Routes} from 'react-router-dom'
 import {MainLayout} from "./layout/MainLayout/MainLayout";
-import {FilterMovie} from "./pages";
+import {FilterMovie, TvPages, TvPagesProgram} from "./pages";
 import 'bootstrap/dist/css/bootstrap.min.css';
+
+
 
 const App: FC = () => {
     return (
         <Routes >
             <Route path={'/'} element={<MainLayout/>}>
                 <Route index element={<Navigate to={'movies'} />}/>
+                <Route path={'tv'} element={<TvPages/>}/>
+                <Route path={'tv/:id'} element={<TvPagesProgram/>}/>
                 <Route path={'movies'} element={<MovieList />}/>
                     <Route path={'movies/:id'} element={<MovieInfo />}/>
                 <Route path={'filter'} element={<FilterMovie />}/>

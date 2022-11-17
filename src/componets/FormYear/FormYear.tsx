@@ -14,18 +14,17 @@ const FormYear:FC = () => {
     }
 
     const submit = (year:any) => {
-        console.log(year.year)
         dispatch(movieAction.setYearValue({year:year.year}))
-
+        reset()
     };
 
     return (
-        <div>
-            <form onSubmit={handleSubmit(submit)}>
-                Вибрати рік: <select {...register('year')}>
-                {array.map(value => <option value={value}>{value}</option>)}
+        <div className='mb-0.5'>
+            <form  onSubmit={handleSubmit(submit)}>
+                <span className='text-red-50'>Вибрати рік :</span>: <select className='bg-amber-800' {...register('year')}>
+                {array.map((value,index) => <option key={index} value={value}>{value}</option >)}
             </select>
-                <button onClick={()=>navigate('year')}>Вибір</button>
+                <button className='border-2 m-lg-1 w-25 h-8  text-red-50 bg-blue-200 rounded-full' onClick={()=>navigate('year')}>Вибір</button>
             </form>
         </div>
     );

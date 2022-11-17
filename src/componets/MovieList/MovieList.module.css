@@ -1,0 +1,6 @@
+.divi{
+    display: grid;
+    grid-template-columns: repeat(3, 2fr);
+    grid-auto-rows: 300px;
+    margin: auto 280px;
+}
