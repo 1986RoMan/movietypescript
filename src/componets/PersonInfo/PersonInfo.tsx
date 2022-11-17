@@ -85,7 +85,6 @@ const PersonInfo: FC = () => {
         }
     }
     // let corect=movieArray.join(',')
-    console.log(state.known_for)
     return (
         <div style={{display: 'flex',flexWrap:'wrap',marginTop:"15px",marginLeft:'280px',color:'white'}}>
             {
