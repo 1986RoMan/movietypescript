@@ -1,9 +1,9 @@
 import React, {FC} from 'react';
 import {useForm} from "react-hook-form";
 import {useAppDispatch} from "../../hooks/hook";
-import {movieAction} from "../../redax";
 import {useNavigate} from "react-router-dom";
-import {Button} from "react-bootstrap";
+
+import {movieAction} from "../../redax";
 
 const SearchForm:FC = () => {
     const navigate = useNavigate();

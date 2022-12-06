@@ -1,7 +1,8 @@
 import React, {FC, useEffect, useState} from 'react';
 import {useAppDispatch, useAppSelector} from "../../hooks/hook";
-import {movieAction} from "../../redax";
 import ReactPaginate from "react-paginate";
+
+import {movieAction} from "../../redax";
 import {MovieCard} from "../MovieCard/MovieCard";
 
 const SearchPage:FC = () => {

@@ -1,6 +1,7 @@
 import React, {FC} from 'react';
-import {ITv} from "../../interfaces/interfaces";
 import {Link} from "react-router-dom";
+
+import {ITv} from "../../interfaces/interfaces";
 
 interface IPropsTv{
     tv:ITv

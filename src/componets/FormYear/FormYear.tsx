@@ -1,8 +1,9 @@
 import React, {FC} from 'react';
 import {useForm} from "react-hook-form";
 import {useAppDispatch} from "../../hooks/hook";
-import {movieAction} from "../../redax";
 import {useNavigate} from "react-router-dom";
+
+import {movieAction} from "../../redax";
 
 const FormYear:FC = () => {
     const navigate = useNavigate();

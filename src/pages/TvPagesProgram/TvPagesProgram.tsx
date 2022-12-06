@@ -1,13 +1,12 @@
 import React, {FC, useEffect, useState} from 'react';
-import {Link, useParams} from "react-router-dom";
-import {tvService} from "../../services";
-import {ICredit, IGenre, ITvPrograms} from "../../interfaces/interfaces";
+import {useParams} from "react-router-dom";
+import {AiOutlineCloseSquare} from "react-icons/ai";
 import {useAppDispatch, useAppSelector} from "../../hooks/hook";
-import {tvActions} from "../../redax/slices/tv.slice";
+
+import {ICredit, IGenre, ITvPrograms} from "../../interfaces/interfaces";
 import {genreTvAction} from "../../redax/slices/genreTv.slice";
+import {tvService} from "../../services";
 import css from './TvPagesProgram.module.css'
-import { AiOutlineCloseSquare } from "react-icons/ai";
-import {MovieList, TvsTop} from "../../componets";
 
 const TvPagesProgram:FC = () => {
     const [classZminna,setClassZminna] = useState(false);

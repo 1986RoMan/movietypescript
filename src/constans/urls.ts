@@ -11,7 +11,8 @@ const urls={
     tvProgram:'tv',
     genderTv:'/genre/tv/list',
     tvTop:'/tv/top_rated',
-    nowPlaying :'/movie/now_playing'
+    nowPlaying :'/movie/now_playing',
+    upcoming:'/movie/upcoming'
 }
 
 export {baseURL,urls}

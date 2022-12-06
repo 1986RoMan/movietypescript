@@ -1,14 +1,15 @@
 import React, {FC, useEffect, useState} from 'react';
 import {useAppDispatch, useAppSelector} from "../../hooks/hook";
-import {MovieCard} from "../../componets";
 import ReactPaginate from "react-paginate";
+
+import {MovieCard} from "../../componets";
 import {movieAction} from "../../redax";
-//import '../../componets/MovieList/Pagination.scss;
+
 
 const FilterMovie:FC = () => {
     const [page, setPage] = useState(1);
     const dispatch = useAppDispatch();
-    const {filterMovie,pageCount,filterGenre} = useAppSelector(state => state.movieReducer);
+    const {movies,pageCount,filterGenre} = useAppSelector(state => state.movieReducer);
 
     const handlePageClick = ({selected}: { selected: number }) => {
         setPage(selected + 1)
@@ -21,7 +22,7 @@ const FilterMovie:FC = () => {
         <div >
 
             <div style={{display: 'flex',flexWrap:'wrap',paddingLeft:'250px'}}>{
-                filterMovie.map(movie => <MovieCard key={movie.id} movie={movie}/>)
+                movies.map(movie => <MovieCard key={movie.id} movie={movie}/>)
             }</div>
             <div style={{position:'sticky',bottom:0}}>
                 {pageCount && <ReactPaginate

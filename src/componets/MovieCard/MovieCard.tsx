@@ -1,19 +1,22 @@
 import React, {FC, ReactNode, useState} from 'react';
 import {Link} from "react-router-dom";
 import {IoIosInformationCircleOutline} from 'react-icons/io'
+
 import {IGenre, IMovie} from "../../interfaces/interfaces";
 import css from './MovieCard.module.css'
 import {useAppSelector} from "../../hooks/hook";
+
 export  interface Iprops {
         movie:IMovie,
         children?:ReactNode
     }
-const MovieCard:FC<Iprops> = ({movie}) => {
+
+    const MovieCard:FC<Iprops> = ({movie}) => {
     const {genres} = useAppSelector(state => state.genreReducer);
       const [info,setInfo] = useState(false);
     return (
         <div>
-                <IoIosInformationCircleOutline style={{color:'white',fontSize:'30px',marginBottom:'-30px'}}
+                <IoIosInformationCircleOutline style={{color:'red',fontSize:'30px',marginBottom:'-30px'}}
                                                onMouseOver={()=>{setInfo(prevState => !prevState)}}
                                                onMouseOut={()=>{setInfo(prevState => !prevState)}}
                 />

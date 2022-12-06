@@ -1,18 +1,18 @@
 import React, {FC, useEffect, useState} from 'react';
-import {movieAction, personAction} from "../../redax";
 import {useAppDispatch, useAppSelector} from "../../hooks/hook";
-import {MovieCard} from "../MovieCard/MovieCard";
 import ReactPaginate from "react-paginate";
+
+import {movieAction, personAction} from "../../redax";
 import './Pagination.scss';
 import css from './MovieList.module.css'
 import {NowPlaying} from "../NowPlaying/NowPlaying";
+import {MovieCard} from "../MovieCard/MovieCard";
 
 const MovieList: FC = () => {
     const [page, setPage] = useState(1);
     const dispatch = useAppDispatch();
     const {movies, pageCount,searchM,filterYearValue,errors} = useAppSelector(state => state.movieReducer);
 
-    console.log(errors)
     useEffect(() => {
         dispatch(movieAction.allMovie({page}))
     }, [page])

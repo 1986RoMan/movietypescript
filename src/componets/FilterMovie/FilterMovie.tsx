@@ -1,6 +1,7 @@
 import React, {FC, useEffect, useState} from 'react';
 import {useForm} from "react-hook-form";
 import {useAppDispatch, useAppSelector} from "../../hooks/hook";
+
 import {genreAction} from "../../redax/slices/genre.slice";
 import {movieAction} from "../../redax";
 import {useNavigate} from "react-router-dom";

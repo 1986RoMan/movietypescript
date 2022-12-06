@@ -1,9 +1,10 @@
 import React, {FC, useEffect, useState} from 'react';
 import {useAppDispatch, useAppSelector} from "../../hooks/hook";
+import ReactPaginate from "react-paginate";
+
 import {tvActions} from "../../redax/slices/tv.slice";
 import {Tvs, TvsTop} from "../../componets";
 import './TvPage.scss'
-import ReactPaginate from "react-paginate";
 
 const TvPages:FC = () => {
     const [page, setPage] = useState(1);
@@ -16,7 +17,7 @@ const TvPages:FC = () => {
     const handlePageClick = ({selected}: { selected: number }) => {
         setPage(selected + 1)
     };
-    console.log(errors?.status_code)
+
     return (
         <div>
             <TvsTop/>

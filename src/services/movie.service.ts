@@ -18,7 +18,8 @@ const movieService ={
  personInfo:(id:any)=> axiosInstance.get(`${urls.personInf}/${id}?api_key=${api_key}&language=ru`),
  movieCredits:(person_id:number)=>axiosInstance.get(`${urls.personInf}/${person_id}/movie_credits?api_key=${api_key}&language=ru`),
  credits:(id:number)=> axiosInstance.get(`${urls.movieVideo}/${id}/credits?api_key=${api_key}&language=ru`),
- allNowPlaying:() => axiosInstance.get(`${urls.nowPlaying}?api_key=${api_key}&language=ru`)
+ allNowPlaying:() => axiosInstance.get(`${urls.nowPlaying}?api_key=${api_key}&language=ru`),
+allUpcoming:()=> axiosInstance.get(`${urls.upcoming}?api_key=${api_key}&language=ru`)
 }
 
 export {movieService}

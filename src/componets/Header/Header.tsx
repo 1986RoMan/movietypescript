@@ -1,6 +1,7 @@
 import React, {FC} from 'react';
 import {Badge} from "react-bootstrap";
 import {Link} from "react-router-dom";
+
 import {FilterMovie} from "../FilterMovie/FilterMovie";
 import './Header.scss'
 
@@ -21,6 +22,9 @@ const Header: FC = () => {
                     <Link to={'/'} ><strong>Фільми</strong></Link>
                 </div>
             <FilterMovie/>
+                <div style={{ display:'flex',alignItems:'center',justifyContent:'center'}}>
+                    <Link to={'upcoming'} ><strong>Незабаром появляться(Новинки) </strong></Link>
+                </div>
             </div>
         </div>
 

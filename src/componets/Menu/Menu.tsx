@@ -1,8 +1,8 @@
 import React, {FC} from 'react';
-import {SearchForm} from "../SearchForm/SearchForm";
-import {FilterMovie} from "../FilterMovie/FilterMovie";
-import {FormYear} from "../FormYear/FormYear";
 import {Link} from "react-router-dom";
+
+import {SearchForm} from "../SearchForm/SearchForm";
+import {FormYear} from "../FormYear/FormYear";
 
 const Menu:FC = () => {
         return (

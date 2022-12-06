@@ -54,15 +54,13 @@ const tvSlice = createSlice({
             .addCase(allTv.fulfilled,((state, action) => {
                 state.tvs=action.payload.results
                 state.pageCount=action.payload.total_pages
-                //state.errors=null
+
             }))
             .addCase(allTv.rejected,((state, action) => {
                 state.errors=action.payload
-                console.log(state.errors.status_message)
             }))
             .addCase(allTvTop.fulfilled,((state, action) => {
                 state.tvsTop=action.payload.results
-
             }))
     }
 });

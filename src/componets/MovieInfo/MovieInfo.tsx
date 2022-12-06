@@ -1,10 +1,12 @@
 import React, {FC, useEffect, useState} from 'react';
 import {useLocation, useNavigate, useParams} from "react-router-dom";
-import {useAppSelector} from "../../hooks/hook";
 import ReactPlayer from 'react-player'
+
+import {useAppSelector} from "../../hooks/hook";
 import {movieService} from "../../services";
-import { IMoviePerson, IPerson} from "../PersonInfo/PersonInfo";
+import {IMoviePerson} from "../PersonInfo/PersonInfo";
 import css from './PersonInfo.module.css'
+
 interface IKey {
     name: string,
     key: string,

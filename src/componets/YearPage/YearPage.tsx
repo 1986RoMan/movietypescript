@@ -1,9 +1,9 @@
 import React, {FC, useEffect, useState} from 'react';
 import {useAppDispatch, useAppSelector} from "../../hooks/hook";
+
 import {movieAction} from "../../redax";
 import ReactPaginate from "react-paginate";
 import {MovieCard} from "../MovieCard/MovieCard";
-import {useForm} from "react-hook-form";
 
 const YearPage:FC = () => {
     const [page, setPage] = useState(1);

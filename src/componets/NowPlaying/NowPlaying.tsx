@@ -1,8 +1,9 @@
 import React, {FC, useEffect} from 'react';
 import {useAppDispatch, useAppSelector} from "../../hooks/hook";
-import {movieAction} from "../../redax";
-import {NowPlayingCard} from "../NowPlayingCard/NowPlayingCard";
 import {MdChevronLeft, MdChevronRight} from "react-icons/md";
+import {NowPlayingCard} from "../NowPlayingCard/NowPlayingCard";
+
+import {movieAction} from "../../redax";
 
 const NowPlaying:FC = () => {
     const {nowPlayingNow} = useAppSelector(state => state.movieReducer);
@@ -10,7 +11,6 @@ const NowPlaying:FC = () => {
     useEffect(()=>{
        dispatch(movieAction.nowPlying())
     },[])
-    console.log(nowPlayingNow)
 
     const leftSlide:any = () => {
         const sliderLeft:any= document.getElementById('slider');
@@ -24,7 +24,7 @@ const NowPlaying:FC = () => {
     return (
         <div style={{ marginLeft:'230px', marginBottom:'50px'}}>
             <h2  className='justify-content-sm-center flex items-center'>Дивляться</h2>
-            <div className='justify-content-sm-center relative flex items-center align-content-center '  >
+            <div className='justify-content-sm-center relative flex items-center align-content-center  '  >
                 <MdChevronLeft style={{color:'white'}} onClick={RightSlide} size={40}/>
                 <div  id={'slider'} className='relative flex items-center w-[700px]  overflow-x-hidden overflow-y-hidden scroll whitespace-nowrap '>
             {

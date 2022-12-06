@@ -15,4 +15,5 @@ export * from './Tvs/Tvs';
 export * from './TvsTop/TvsTop';
 export * from './TvsTop/TvTop';
 export * from './NowPlaying/NowPlaying';
-export * from './NowPlayingCard/NowPlayingCard'
+export * from './NowPlayingCard/NowPlayingCard';
+export * from './Upcoming/Upcoming'

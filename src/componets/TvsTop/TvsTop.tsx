@@ -1,8 +1,9 @@
 import React, {FC, useEffect} from 'react';
 import {useAppDispatch, useAppSelector} from "../../hooks/hook";
+import {MdChevronLeft,MdChevronRight} from "react-icons/md";
+
 import {tvActions} from "../../redax/slices/tv.slice";
 import {TvTop} from "./TvTop";
-import {MdChevronLeft,MdChevronRight} from "react-icons/md";
 
 const TvsTop:FC = () => {
     const {tvsTop} = useAppSelector(state => state.tvReducer);

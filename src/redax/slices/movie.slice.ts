@@ -9,7 +9,6 @@ interface IState {
     movies:IMovie[],
     pageCount:number| null,
     searchM:object|null,
-    filterMovie:IMovie[],
     filterGenre:number|null,
     filterYearValue:string,
     setSearchValue:string,
@@ -20,13 +19,20 @@ const initialState:IState={
     movies:[],
     pageCount:null,
     searchM:null,
-    filterMovie:[],
     filterGenre:null,
     filterYearValue:'',
     setSearchValue:'',
     errors:null,
     nowPlayingNow : []
 }
+const upcomingAll=createAsyncThunk(
+    'upcomingAll',
+    async ()=>{
+        const {data} = await movieService.allUpcoming();
+       return data
+    }
+)
+
 const movieSearch = createAsyncThunk<IServerResponse<IMovie[]>, {search:any,page:number}>(
   'allMovie/movieSearch',
   async ({search,page})=>{
@@ -92,12 +98,15 @@ const movieSlice = createSlice({
                 state.pageCount = action.payload.total_pages
                 state.errors= ''
             }))
+            .addCase(upcomingAll.fulfilled,((state, action) => {
+                state.movies=action.payload.results
+            }))
             .addCase(movieSearch.fulfilled,(state, action)=>{
                 state.movies=action.payload.results
                 state.pageCount=action.payload.total_pages
             })
             .addCase(filterMovie.fulfilled,(state, action)=>{
-                state.filterMovie=action.payload.results
+                state.movies=action.payload.results
                 state.pageCount=action.payload.total_pages
             })
             .addCase(filterYear.fulfilled,(state, action)=>{
@@ -111,7 +120,6 @@ const movieSlice = createSlice({
                 const [type] = action.type.split('/').splice(-1);
                 if (type === 'rejected') {
                     state.errors = action.payload
-                    console.log(state.errors)
                 }
             })
     }
@@ -126,7 +134,8 @@ const movieAction={
     setFilterValue,
     filterYear,
     setYearValue,
-    nowPlying
+    nowPlying,
+    upcomingAll
 }
 
 export {
